@@ -52,7 +52,7 @@ particlesJS(
         },
       },
       color: {
-        value: "#ffffff",
+        value: "#045515",
       },
       shape: {
         type: "circle",
@@ -119,7 +119,7 @@ particlesJS(
         },
         onclick: {
           enable: true,
-          mode: "push",
+          mode: "repulse",
         },
         resize: true,
       },

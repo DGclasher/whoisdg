@@ -18,3 +18,19 @@ html{
    overflow-x: hidden;
    overflow-y: hidden;
 }
+
+.name {
+   animation: glow .5s infinite alternate;
+}
+
+@keyframes glow {
+   to {
+       text-shadow: 0 0 10px green;
+   }
+}
+
+.name {
+   font-family: sans-serif;
+   font-size: 36px;
+   font-weight: bold;
+}
