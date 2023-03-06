@@ -34,3 +34,7 @@ html{
    font-size: 36px;
    font-weight: bold;
 }
+
+.media-links{
+   z-index: 100;
+}
