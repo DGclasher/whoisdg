@@ -3,7 +3,59 @@
     Projects
 {% endblock title %}
 {% block body %}
-    <div class="text-lime-600 flex flex-col justify-center items-center">
-        <h1>Projects Page</h1>
+    <div class="projects-div text-lime-600 flex flex-col items-center h-[200%]">
+        <h1 class="text-3xl pt-10">My Projects</h1>
+        <div class="cards-div pt-10 p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
+            <div class="bg-opacity-60 max-w-sm rounded overflow-hidden shadow-lg bg-slate-900 h-70%]">
+                <div class="px-6 py-4">
+                  <div class="font-bold text-xl mb-2">RESTless</div>
+                  <p class="text-gray-700 text-base text-white">
+                    RESTless is a web service built using Django Rest Framework that allows users to retrieve and manage quotes. 
+                    </p>
+                </div>
+                <div class="px-6 pt-10 pb-1 relative">
+                  <span class="inline-block "><a href="https://github.com/DGclasher/RESTless" target="_blank"><img class="h-7 invert" src="/static/images/github.png"></a></span>
+                </div>
+              </div>
+              <div class="bg-opacity-60 max-w-sm rounded overflow-hidden shadow-lg bg-slate-900 h-70%]">
+                <div class="px-6 py-4">
+                  <div class="font-bold text-xl mb-2">bloghub</div>
+                  <p class="text-gray-700 text-base text-white">
+                    BlogHub is built using the Django framework which allows users to perform basic CRUD (Create, Read, Update, Delete) operations on blog posts. 
+                    </p>
+                </div>
+                <div class="px-6 pt-4 pb-2 relative">
+                  <span class="inline-block "><a href="https://github.com/DGclasher/bloghub" target="_blank"><img class="h-7 invert" src="/static/images/github.png"></a></span>
+                </div>
+              </div>
+              <div class="bg-opacity-60 max-w-sm rounded overflow-hidden shadow-lg bg-slate-900 h-70%]">
+                <div class="px-6 py-4">
+                  <div class="font-bold text-xl mb-2">bloghub reborn</div>
+                  <p class="text-gray-700 text-base text-white">
+                    Bloghub-Reborn is a full-stack web application built on MERN stack that allows users to perform basic CRUD (Create, Read, Update, Delete) operations on blog posts.
+                    </p>
+                </div>
+                <div class="px-6 pt-4 pb-2 relative">
+                  <span class="inline-block "><a href="https://github.com/DGclasher/bloghub-reborn" target="_blank"><img class="h-7 invert" src="/static/images/github.png"></a></span>
+                </div>
+              </div>
+        </div>
+        <h1 class="text-3xl pt-5">Upcoming Projects</h1>
+        <div class="cards-div pt-10 p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
+            <div class="bg-opacity-60 max-w-sm rounded overflow-hidden shadow-lg bg-slate-900 h-70%]">
+                <div class="px-6 py-4">
+                  <div class="font-bold text-xl mb-2">openCVE</div>
+                  <p class="text-gray-700 text-base text-white">
+                    This Python command-line tool retrieves details on a specified CVE from public databases and presents them in a clear and organized format, aiding in quick and comprehensive analysis of potential vulnerabilities.
+                    </p>
+                </div>
+                <div class="px-6 pt-4 pb-2 relative">
+                  <span class="inline-block "><a href="" target="_blank"><img class="h-7 invert" src="/static/images/github.png"></a></span>
+                </div>
+              </div>
+              
+        </div>
+    
     </div>
+    
 {% endblock body %}

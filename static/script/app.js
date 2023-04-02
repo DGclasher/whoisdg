@@ -2,9 +2,9 @@
 var aText = new Array(
   "hello, i'm deba",
   "a cybersecurity enthusiast",
-  "also learning some back end along with it"
+  "also an upcoming backend developer"
 );
-var iSpeed = 100;
+var iSpeed = 40;
 var iIndex = 0;
 var iArrLength = aText[0].length;
 var iScrollAt = 20;
