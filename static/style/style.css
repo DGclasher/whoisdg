@@ -7,6 +7,13 @@
    z-index: 50;
 }
 
+/* .particle-div canvas{
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   z-index: -1;
+} */
+
 header{
    z-index: 100;
    position: fixed;
@@ -36,5 +43,17 @@ html{
 }
 
 .media-links{
+   z-index: 100;
+}
+
+/* .projects-div{
+   z-index: 100;
+} */
+
+.cards-div{
+   z-index: 100;
+}
+
+.contacts-container{
    z-index: 100;
 }
