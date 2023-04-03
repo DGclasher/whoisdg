@@ -11,7 +11,7 @@ body{
 }
 
 header{
-   z-index: 100;
+   z-index: 1;
    position: fixed;
    top: 0;
    width: 100vw;
@@ -39,13 +39,13 @@ html, body{
 }
 
 .media-links{
-   z-index: 100;
+   z-index: 0;
 }
 
 .cards-div{
-   z-index: 100;
+   z-index: 0;
 }
 
 .contacts-container{
-   z-index: 100;
+   z-index: 0;
 }
