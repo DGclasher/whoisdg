@@ -1,18 +1,14 @@
 .particle-div{
-   position: absolute;
-   top: 0;
-   left: 0;
-   height: 100vh;
-   width: 100vw;
-   z-index: 50;
-}
-
-/* .particle-div canvas{
-   position: absolute;
+   position: fixed;
    width: 100%;
    height: 100%;
    z-index: -1;
-} */
+   background-size: cover; background-position: 50% 50% ;background-repeat: no-repeat;
+}
+
+body{
+   font-family: 'Roboto Slab', serif;
+}
 
 header{
    z-index: 100;
@@ -21,9 +17,9 @@ header{
    width: 100vw;
 }
 
-html{
+html, body{
    overflow-x: hidden;
-   overflow-y: hidden;
+   min-height: 100%;
 }
 
 .name {
@@ -45,10 +41,6 @@ html{
 .media-links{
    z-index: 100;
 }
-
-/* .projects-div{
-   z-index: 100;
-} */
 
 .cards-div{
    z-index: 100;
