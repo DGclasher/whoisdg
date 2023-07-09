@@ -1,4 +1,4 @@
-name: Docker Deploy
+name: deploy whoisdg
 
 on:
   push:
@@ -11,27 +11,23 @@ jobs:
 
     steps:
       
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
+      - name: checkout code
+        uses: actions/checkout@v2
+
+      - name: login to dockerhub
+        uses: docker/login-action@v1
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
+          username: ${{secrets.DOCKET_USER}}
+          password: ${{secrets.DOCKER_PASS}}
+      - name: build and push docket image
+        uses: docket/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: dgclasher/whoisdg
 
-      - name: Build and Push Docker Image
-        env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USER }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASS }}
-        run: |
-          echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
-          docker build -t $DOCKER_USERNAME/whoisdg .
-          docker push $DOCKER_USERNAME/whoisdg
-
-      - name: SSH into EC2 and Deploy Docker Image
+      - name: deploy to EC2
         uses: appleboy/ssh-action@master
-        env:
-            PORT: ${{ secrets.APPLICATION_PORT }}
-            DOCKER_USER: ${{ secrets.DOCKER_USER }}
         with:
           host: ${{ secrets.HOST_IP }}
           username: ${{ secrets.EC2_USERNAME }}
@@ -39,5 +35,5 @@ jobs:
           script: |
             docker stop whoisdg || true
             docker rm whoisdg || true
-            docker pull $DOCKER_USER/whoisdg
-            docker run -d --rm --name whoisdg -p $PORT:$PORT $DOCKER_USER/whoisdg
+            docker pull ${{secrets.DOCKER_USER}}/whoisdg
+            docker run -d --rm --name whoisdg -p ${{secrets.APPLICATION_PORT}}:${{secrets.APPLICATION_PORT}}  ${{secrets.DOCKER_USER}}/whoisdg
