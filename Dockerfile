@@ -6,4 +6,4 @@ RUN pip3 install -r /requirements.txt
 COPY . /app
 WORKDIR /app
 
-ENTRYPOINT [ "./gunicorn_starter.sh" ]
+CMD [ "gunicorn","-w","4","--bind","0.0.0.0:5000","app:app" ]
