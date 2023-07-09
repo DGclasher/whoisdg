@@ -20,7 +20,7 @@ jobs:
                 DOCKER_USER: ${{ secrets.DOCKER_USER }}
                 REPO: whoisdg
               run: |
-                docker build -t $DOCKER_USER/$REPO .
+                docker build -t $DOCKER_USER/$REPO ../
                 docker push $DOCKER_USER/$REPO
 
     deploy:
