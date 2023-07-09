@@ -17,6 +17,7 @@ jobs:
                 docker login -u $DOCKER_USER -p $DOCKER_PASS
             - name: push image to docker
               env:
+                DOCKER_USER: ${{ secrets.DOCKER_USER }}
                 REPO: whoisdg
               run: |
                 docker build -t $DOCKER_USER/$REPO .
