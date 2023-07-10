@@ -1,65 +1,36 @@
-name: ci
-
-on:
-
-  push:
-
-    branches:
-
-      - 'main'
-
-jobs:
-
-  docker:
-
-    runs-on: ubuntu-latest
-
-    steps:
-
-      -
-
-        name: Set up QEMU
-
-        uses: docker/setup-qemu-action@v2
-
-      -
-
-        name: Set up Docker Buildx
-
-        uses: docker/setup-buildx-action@v2
-
-      -
-
-        name: Login to Docker Hub
-
-        uses: docker/login-action@v2
-
-        with:
-
-          username: ${{ secrets.DOCKER_USER }}
-
-          password: ${{ secrets.DOCKER_PASS }}
-
-      -
-
-        name: Build and push
-
-        uses: docker/build-push-action@v4
-
-        with:
-
-          push: true
-
-          tags: dgclasher/whoisdg
-
-      - name: deploy to EC2
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST_IP }}
-          username: ${{ secrets.EC2_USERNAME }}
-          key: ${{ secrets.SSH_KEY }}
-          script: |
-            docker stop whoisdg || true
-            docker rm whoisdg || true
-            docker pull ${{secrets.DOCKER_USER}}/whoisdg
-            docker run -d --rm --name whoisdg -p ${{secrets.APPLICATION_PORT}}:${{secrets.APPLICATION_PORT}}  ${{secrets.DOCKER_USER}}/whoisdg
+---
+  name: deploy whoisdg
+  on:
+    push:
+      branches:
+        - main
+  jobs:
+    docker:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Set up QEMU
+          uses: docker/setup-qemu-action@v2
+        - name: Set up Docker Buildx
+          uses: docker/setup-buildx-action@v2
+        - name: Login to Docker Hub
+          uses: docker/login-action@v2
+          with:
+            username: ${{ secrets.DOCKER_USER }}
+            password: ${{ secrets.DOCKER_PASS }}
+        - name: Build and push
+          uses: docker/build-push-action@v4
+          with:
+            push: true
+            tags: dgclasher/whoisdg
+        - name: deploy to EC2
+          uses: appleboy/ssh-action@master
+          with:
+            host: ${{ secrets.HOST_IP }}
+            username: ${{ secrets.EC2_USERNAME }}
+            key: ${{ secrets.SSH_KEY }}
+            script: |
+              docker stop whoisdg || true
+              docker rm whoisdg || true
+              docker pull ${{ secrets.DOCKER_USER }}/whoisdg
+              docker run -d --rm --name whoisdg -p ${{ secrets.APPLICATION_PORT }}:${{ secrets.APPLICATION_PORT }}  ${{ secrets.DOCKER_USER }}/whoisdg
+  
