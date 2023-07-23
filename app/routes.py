@@ -7,8 +7,7 @@ def home():
 
 @app.route("/projects")
 def projects():
-    projects = current_app.db.get_projects()
-    return render_template("projects.html", projects=projects)
+    return "Work in progress"
 
 @app.route("/contact", methods=['GET','POST'])
 def contact():
