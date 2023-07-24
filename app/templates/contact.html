@@ -3,27 +3,40 @@
     Contact
 {% endblock title %}
 {% block body %}
-
 <div class="flex flex-col md:flex-row py-20 px-8 md:p-20 md:px-8 gap-10">
-    <div class="flex flex-col gap-4 md:w-full p-2 md:p-4">
+  <div class="flex flex-col gap-4 md:w-full p-2 md:p-4">
       <h2 class="text-2xl">Send a message</h2>
       <form action="{{url_for('contact')}}" method="post">
-        <div class="flex flex-col gap-4">
-          <input class="w-full md:w-2/3 px-4 py-2 bg-zinc-900 text-white rounded-md" type="text" name="name" placeholder="Your Name" required>
-          <input class="w-full md:w-2/3 px-4 py-2 bg-zinc-900 text-white rounded-md" type="email" name="email" placeholder="Your Email ID" required>
-          <textarea class="w-full md:w-2/3 px-4 py-2 rounded-md bg-zinc-900 text-white" name="message" cols="30" rows="10" placeholder="Your message" required></textarea>
-          <button type="submit" class="w-full md:w-2/3 px-4 py-2 rounded-md bg-lime-700 hover:bg-lime-800 transition-colors text-white">Send</button>
-        </div>
+          <div class="flex flex-col gap-4">
+              <input class="w-full md:w-2/3 px-4 py-2 bg-zinc-900 text-white rounded-md" type="text" name="name" placeholder="Your Name" required>
+              <input class="w-full md:w-2/3 px-4 py-2 bg-zinc-900 text-white rounded-md" type="email" name="email" placeholder="Your Email ID" required>
+              <textarea class="w-full md:w-2/3 px-4 py-2 rounded-md bg-zinc-900 text-white resize-none md:resize-y" name="message" cols="30" rows="10" placeholder="Your message" required></textarea>
+              <button type="submit" class="w-full md:w-2/3 px-4 py-2 rounded-md bg-lime-700 hover:bg-lime-800 transition-colors text-white">Send</button>
+          </div>
       </form>
-    </div>
-    <div class="md:w-1/2 p-2 md:p-4">
-      <h2 class="text-2xl mb-2">Profiles</h2>
-      <div class="bg-zinc-900 text-white p-4 rounded-md">
-        <a href="https://linktr.ee/dgclasher" target="_blank" rel="noopener noreferrer">
-          <img src="/static/images/linktree.png" alt="Linktree Logo" class="w-20 h-auto">
-        </a>
+      {% with flashed_messages = get_flashed_messages() %}
+      {% if flashed_messages %}  
+      <div class="popup-message" id="popupMessage">
+        <div class="popup-content p-3">
+            <span class="popup-message-text" id="popupMessageText">{{ flashed_messages | join }}</span>
+        </div>
       </div>
-    </div>
+      {% endif %}
+      {% endwith %}
   </div>
+  <div class="md:w-1/2 p-2 md:p-4">
+      <h2 class="text-2xl mb-2">Profiles</h2>
+      <div class="bg-zinc-900 text-white p-4 rounded-md flex flex-col items-center justify-center">
+          <a href="https://linktr.ee/dgclasher" target="_blank" rel="noopener noreferrer">
+              <img src="/static/images/linktree.png" alt="Linktree Logo" class="w-20 h-auto">
+          </a>
+      </div>
+      <h2 class="text-2xl mb-2 mt-5">Contact</h2>
+      <div class="bg-zinc-900 text-white p-4 rounded-md flex flex-col">
+          <a href="mailto:dgclasher@proton.me" class="text-lime-700">dgclasher@proton.me</a>
+      </div>
+  </div>
+</div>
+
 
 {% endblock body %}
