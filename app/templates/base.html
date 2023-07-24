@@ -4,36 +4,32 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <link rel="icon" href="/static/images/android-chrome-512x512.png" type="image/png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400&display=swap" rel="stylesheet">
-
-    <title>whoisdg - {% block title %} {% endblock title %}</title>
     <link rel="stylesheet" href="/static/style/style.css" />
+    <link rel="icon" href="/static/images/android-chrome-512x512.png" type="image/png">
+    <script defer src="/static/script/script.js"></script>
+    <title>whoisdg - {% block title %} {% endblock title %}</title>
     {% block head %} {% endblock head %}
   </head>
   <body class="bg-black h-screen">
-    <header class="fixed top-0 left-0 w-full bg-zinc-900 bg-opacity-60 h-16 p-4 text-lime-600">
+    <header class="fixed top-0 left-0 w-full bg-zinc-900 backdrop-blur-md bg-opacity-50 h-16 p-4 text-lime-600 z-10">
       <ul class="flex justify-center h-full items-center text-lg md:text-xl">
         <li class="mx-5 md:mx-20">
-          <a class="hover:text-lime-50" href="{{url_for('home')}}">/home</a>
+          <a class="hover:text-lime-50" href="{{url_for('home')}}">HOME</a>
         </li>
         <li class="mx-5 md:mx-20">
-          <a href="{{url_for('projects')}}" class="hover:text-lime-50">/projects</a>
+          <a href="{{url_for('projects')}}" class="hover:text-lime-50">PROJECTS</a>
         </li>
         <li class="mx-5 md:mx-20">
-          <a href="{{url_for('contact')}}" class="hover:text-lime-50">/contact</a>
+          <a href="{{url_for('contact')}}" class="hover:text-lime-50">CONTACT</a>
         </li>
       </ul>
     </header>
-      <div class="">
+      <div class="z-1">
         {% block body %}
         
         {% endblock body %}
       </div>
-      <div class="bottom-0 left-0 p-4 text-white text-sm md:text-base absolute">
+      <div class="bottom-0 left-0 p-4 text-white text-sm md:text-base relative md:fixed">
         &copy;
         <script>
           document.write(new Date().getFullYear());
@@ -41,5 +37,4 @@
         DGclasher
       </div>
   </body>
-  <script src="/static/script/app.js"></script>
 </html>
