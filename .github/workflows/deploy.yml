@@ -1,0 +1,20 @@
+---
+    name: deploy to server
+    on:
+      workflow_dispatch:
+    jobs:
+      deploy-to-server:
+        runs-on: ubuntu-latest
+        steps:
+          - name: deploy to EC2
+            uses: appleboy/ssh-action@master
+            with:
+              host: ${{ secrets.HOST_IP }}
+              username: ${{ secrets.EC2_USERNAME }}
+              key: ${{ secrets.SSH_KEY }}
+              script: |
+                docker stop whoisdg || true
+                docker rm whoisdg || true
+                docker pull ${{ secrets.DOCKER_USER }}/whoisdg
+                docker run -d --rm --name whoisdg -p ${{ secrets.APPLICATION_PORT }}:${{ secrets.APPLICATION_PORT }}  ${{ secrets.DOCKER_USER }}/whoisdg
+    

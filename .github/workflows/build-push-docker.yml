@@ -1,11 +1,11 @@
 ---
-  name: deploy whoisdg
+  name: build and push to docker
   on:
     push:
       branches:
         - main
   jobs:
-    build-deploy:
+    build-push-docker:
       runs-on: ubuntu-latest
       steps:
         - name: Set up QEMU
@@ -22,15 +22,4 @@
           with:
             push: true
             tags: dgclasher/whoisdg
-        - name: deploy to EC2
-          uses: appleboy/ssh-action@master
-          with:
-            host: ${{ secrets.HOST_IP }}
-            username: ${{ secrets.EC2_USERNAME }}
-            key: ${{ secrets.SSH_KEY }}
-            script: |
-              docker stop whoisdg || true
-              docker rm whoisdg || true
-              docker pull ${{ secrets.DOCKER_USER }}/whoisdg
-              docker run -d --rm --name whoisdg -p ${{ secrets.APPLICATION_PORT }}:${{ secrets.APPLICATION_PORT }}  ${{ secrets.DOCKER_USER }}/whoisdg
   
