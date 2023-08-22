@@ -1,10 +1,10 @@
 FROM python:3.12.0b3-slim
 
-COPY requirements.txt /
-RUN pip3 install -r /requirements.txt
+COPY . /app
+WORKDIR /app
 
-WORKDIR /whoisdg
+RUN python3 -m venv /opt/venv
+RUN /opt/venv/bin/pip install -r requirements.txt && \
+    chmod +x entrypoint.sh
 
-COPY . /whoisdg
-
-CMD [ "gunicorn", "-w", "4", "--bind", "0.0.0.0:5000", "app:app" ]
+CMD [ "/app/entrypoint.sh" ]

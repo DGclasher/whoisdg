@@ -1,10 +1,12 @@
-name: deploy to server
+name: Deploy to Server
+
 on:
   workflow_run:
     workflows: ["Build and Push to DockerHub"]
     types:
       - completed
   workflow_dispatch:
+
 jobs:
   deploy-to-server:
     runs-on: ubuntu-latest
@@ -13,9 +15,9 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST_IP }}
-          username: ${{ secrets.EC2_USERNAME }}
+          username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            docker pull ${{ secrets.DOCKER_USER }}/whoisdg
+            docker pull dgclasher/whoisdg
             docker stop whoisdg || true
-            docker run -d --rm --name whoisdg --env-file ${{ secrets.ENV_FILE }} -p 80:${{ secrets.APPLICATION_PORT }}  ${{ secrets.DOCKER_USER }}/whoisdg
+            docker run -d --rm --name whoisdg --env-file ${{ secrets.ENV_FILE }} -p 80:${{ secrets.APPLICATION_PORT }}  dgclasher/whoisdg
