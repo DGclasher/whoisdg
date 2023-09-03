@@ -11,7 +11,7 @@ jobs:
   deploy-to-server:
     runs-on: ubuntu-latest
     steps:
-      - name: deploy to EC2
+      - name: Deploy to Server
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST_IP }}
@@ -19,5 +19,5 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             docker pull dgclasher/whoisdg
-            docker stop whoisdg || true
-            docker run -d --rm --name whoisdg --env-file ${{ secrets.ENV_FILE }} -p 80:${{ secrets.APPLICATION_PORT }}  dgclasher/whoisdg
+            docker container stop whoisdg || true
+            docker run -d --rm --name whoisdg --env-file ${{ secrets.ENV_FILE }} -p 8000:5000  dgclasher/whoisdg
