@@ -1,2 +1,0 @@
-# whoisdg
-my portfolio
