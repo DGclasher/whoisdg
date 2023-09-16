@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/08bdce0f96.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/static/style/style.css" />
     <link rel="icon" href="/static/images/android-chrome-512x512.png" type="image/png">
     <script defer src="/static/script/script.js"></script>
@@ -12,29 +13,27 @@
   </head>
   <body class="bg-black h-screen">
     <header class="fixed top-0 left-0 w-full bg-zinc-900 backdrop-blur-md bg-opacity-50 h-16 p-4 text-lime-600 z-10">
-      <ul class="flex justify-center h-full items-center text-lg md:text-xl">
-        <li class="mx-5 md:mx-20">
+      <ul class="flex h-full items-center text-lg md:text-xl justify-end">
+        <li class="mx-2 md:mx-10">
           <a class="hover:text-lime-50" href="{{url_for('home')}}">HOME</a>
         </li>
-        <li class="mx-5 md:mx-20">
-          <a href="{{url_for('projects')}}" class="hover:text-lime-50">PROJECTS</a>
-        </li>
-        <li class="mx-5 md:mx-20">
+        <li class="mx-2 md:mx-10">
           <a href="{{url_for('contact')}}" class="hover:text-lime-50">CONTACT</a>
         </li>
       </ul>
     </header>
-      <div class="z-1">
-        {% block body %}
-        
-        {% endblock body %}
-      </div>
-      <div class="bottom-0 left-0 p-4 text-white text-sm md:text-base relative md:fixed">
-        &copy;
-        <script>
-          document.write(new Date().getFullYear());
-        </script>
-        DGclasher
-      </div>
+    
+    <div class="z-1 h-full">
+      {% block body %}
+      {% endblock body %}
+    </div>
+    
+    <div class="bottom-0 left-0 p-4 text-white text-sm md:text-base relative w-full bg-zinc-900 backdrop-blur-md bg-opacity-50 text-center"> <!-- Position the copyright at the bottom -->
+      &copy;
+      <script>
+        document.write(new Date().getFullYear());
+      </script>
+      DGclasher
+    </div>
   </body>
 </html>

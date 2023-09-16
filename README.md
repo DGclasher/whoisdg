@@ -8,9 +8,13 @@ My portfolio website.
 
 Create a `.env` file at root of project, refer to [this](./.env.example) for creating `.env` file.
 
-Make the setup
+Make python virtual environment
 ```
-make initial-setup
+python3 -m venv venv && source venv/bin/activate
+```
+Install requirements
+```
+pip install -r requirements.txt
 ```
 
 Run server

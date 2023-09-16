@@ -1,19 +1,14 @@
+import requests
 import threading
 from app import app
+from io import BytesIO
+from decouple import config
 from flask_mail import Message
-from flask import render_template, request, current_app, flash, url_for, redirect
-
+from flask import render_template, request, current_app, flash, url_for, redirect, send_file
 
 @app.route("/")
 def home():
     return render_template("home.html")
-
-
-@app.route("/projects")
-def projects():
-    projects = current_app.db.get_projects()
-    return render_template("projects.html", projects=projects)
-
 
 def send_email(name, email, message):
     with app.app_context():
@@ -26,6 +21,26 @@ def send_email(name, email, message):
         msg.body += f"\n\nFrom: {email}"
         current_app.mail.send(msg)
 
+@app.route("/download", methods=['GET'])
+def download():
+    try:
+        url = config('RESUME_URL')
+        response = requests.get(url)
+        if response.status_code == 200:
+            file_content = response.content
+            file_name = "resume-deba.pdf"
+            return send_file(
+                BytesIO(file_content),
+                as_attachment=True,
+                download_name=file_name,
+                mimetype="application/pdf"
+            )
+        else:
+            flash("Unable to get resume.")
+            return redirect(url_for('home'))
+    except Exception as e:
+        flash(f"Message: {e}")
+        return redirect(url_for('home'))
 
 @app.route("/contact", methods=['GET', 'POST'])
 def contact():
@@ -34,9 +49,12 @@ def contact():
         email = str(request.form.get('email'))
         message = str(request.form.get('message'))
 
-        send_email_thread = threading.Thread(
-            target=send_email, args=(name, email, message))
-        send_email_thread.start()
+        if config('DEPLOYMENT') == "vercel":
+            send_email(name, email, message)
+        else:
+            send_email_thread = threading.Thread(
+                target=send_email, args=(name, email, message))
+            send_email_thread.start()
 
         flash("Message sent successfully")
         return redirect(url_for('contact'))
