@@ -1,6 +1,7 @@
-FROM python:3.12.0b3-slim
+FROM python:3.11-alpine
 
-COPY . /app
+RUN mkdir /app
+COPY . /app/
 WORKDIR /app
 
 RUN python3 -m venv /opt/venv

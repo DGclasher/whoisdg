@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 APP_PORT=${FLASK_RUN_PORT:-5000}
 
