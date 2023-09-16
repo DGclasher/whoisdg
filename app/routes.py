@@ -1,19 +1,14 @@
+import requests
 import threading
 from app import app
+from io import BytesIO
 from decouple import config
 from flask_mail import Message
-from flask import render_template, request, current_app, flash, url_for, redirect
-
+from flask import render_template, request, current_app, flash, url_for, redirect, send_file
 
 @app.route("/")
 def home():
     return render_template("home.html")
-
-
-@app.route("/projects")
-def projects():
-    return "Work in progress"
-
 
 def send_email(name, email, message):
     with app.app_context():
@@ -26,6 +21,26 @@ def send_email(name, email, message):
         msg.body += f"\n\nFrom: {email}"
         current_app.mail.send(msg)
 
+@app.route("/download", methods=['GET'])
+def download():
+    try:
+        url = config('RESUME_URL')
+        response = requests.get(url)
+        if response.status_code == 200:
+            file_content = response.content
+            file_name = "resume-deba.pdf"
+            return send_file(
+                BytesIO(file_content),
+                as_attachment=True,
+                download_name=file_name,
+                mimetype="application/pdf"
+            )
+        else:
+            flash("Unable to get resume.")
+            return redirect(url_for('home'))
+    except Exception as e:
+        flash(f"Message: {e}")
+        return redirect(url_for('home'))
 
 @app.route("/contact", methods=['GET', 'POST'])
 def contact():

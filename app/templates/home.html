@@ -8,9 +8,39 @@
 {% block body %}
 <div class=" mt-2 py-1 px-4">
   <div class="flex flex-col items-center mt-20 py-10">
-    <h1 class="text-4xl md:text-6xl glitch">DEBA GHOSH</h1>
-    <div class="flex md:text-xl text-lg mt-2 p-2 text-white text-center">
-      <p>A Computer Science undergrad with interests in the field of Cyber Security, devOps</p>
+    <h1 class="text-3xl md:text-6xl glitch">DEBA GHOSH</h1>
+    <div class="text-container">
+      <div class="flex md:text-xl text-lg mt-2 p-2 md:py-5 text-white text-center mb-5">
+        <p>Computer Science undergrad passionate about Cybersecurity and DevOps. Committed to mastering both realms for enhanced digital security and agile software development.</p>
+      </div>
+    </div>
+    <div class="p-2 mb-8">
+      <form action="{{url_for('download')}}">
+        <button type="submit" class="bg-lime-800 hover:bg-lime-900 text-black rounded-xl p-2">Download Resume</button>
+      </form>
+    </div>
+    <div class="flex flex-row">
+      <a href="https://github.com/DGclasher" target="_blank" class="text-3xl mr-4">
+        <i class="fa-brands fa-github "></i>
+      </a>
+      <a href="https://gitlab.com/DGclasher" target="_blank" class="text-3xl mr-4">
+        <i class="fa-brands fa-gitlab "></i>
+      </a>
+      <a href="https://www.linkedin.com/in/debaghosh001" target="_blank" class="text-3xl mr-4">
+        <i class="fa-brands fa-linkedin-in"></i>
+      </a>
+      <a href="https://leetcode.com/DGclasher" target="_blank" class="text-3xl mr-4">
+        <img src="/static/images/leetcode.png" class="w-9 invert">
+      </a>
+      <a href="https://app.hackthebox.com/users/432967" target="_blank" class="text-3xl mr-4">
+        <img src="/static/images/htb.svg" class="w-9 invert">
+      </a>
+      <a href="https://auth.geeksforgeeks.org/user/dgclasher" target="_blank" class="text-3xl mr-4">
+        <img src="/static/images/gfg.svg" class="w-9 invert">
+      </a>
+      <a href="https://www.hackerrank.com/DGclasher" target="_blank" class="text-3xl">
+        <i class="fa-brands fa-hackerrank"></i>
+      </a>
     </div>
   </div>
 </div>
