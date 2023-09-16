@@ -12,10 +12,11 @@ def home():
 
 def send_email(name, email, message):
     with app.app_context():
+        recipients = config('RECIPIENTS').split(',')
         msg = Message(
             f"Message from {name} via portfolio",
             sender=email,
-            recipients=["debaghosh1603@gmail.com"]
+            recipients=recipients
         )
         msg.body = message
         msg.body += f"\n\nFrom: {email}"
