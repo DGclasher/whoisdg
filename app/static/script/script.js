@@ -1,4 +1,6 @@
 const popup_element = document.getElementById("popupMessage");
-setTimeout(() => {
-  popup_element.style.display = "none";
-}, 5000);
+if(popup_element){
+  setTimeout(() => {
+    popup_element.style.display = "none";
+  }, 5000);
+}
