@@ -1,6 +1,7 @@
 .git
 .env
 venv
+.github
 .gitignore
 vercel.json
 **/__pycache__
