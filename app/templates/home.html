@@ -14,10 +14,17 @@
         <p>Computer Science undergrad passionate about Cybersecurity and DevOps. Committed to mastering both realms for enhanced digital security and agile software development.</p>
       </div>
     </div>
-    <div class="p-2 mb-8">
+    <div class="p-2 mb-2 items-center">
       <form action="{{url_for('download')}}">
         <button type="submit" class="bg-lime-800 hover:bg-lime-900 text-black rounded-xl p-2">Download Resume</button>
       </form>
+    </div>
+    <div class="items-center p-2 mb-4">
+    {% with flashed_messages = get_flashed_messages() %}
+    {% if flashed_messages %}
+      <p class="" id="popupMessage">{{ flashed_messages | join}}</p>
+      {% endif %}
+      {% endwith %}
     </div>
     <div class="flex flex-row">
       <a href="https://github.com/DGclasher" target="_blank" class="text-3xl mr-4">
@@ -44,5 +51,4 @@
     </div>
   </div>
 </div>
-
 {% endblock body %}
