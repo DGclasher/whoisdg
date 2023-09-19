@@ -18,6 +18,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            docker pull dgclasher/whoisdg
-            docker container stop whoisdg || true
-            docker run -d --rm --name whoisdg --env-file ${{ secrets.ENV_FILE }} -p 8000:5000  dgclasher/whoisdg
+            deploy-whoisdg
