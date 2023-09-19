@@ -10,18 +10,6 @@ from flask import render_template, request, current_app, flash, url_for, redirec
 def home():
     return render_template("home.html")
 
-def send_email(name, email, message):
-    with app.app_context():
-        recipients = config('RECIPIENTS').split(',')
-        msg = Message(
-            f"Message from {name} via portfolio",
-            sender=email,
-            recipients=recipients
-        )
-        msg.body = message
-        msg.body += f"\n\nFrom: {email}"
-        current_app.mail.send(msg)
-
 @app.route("/download", methods=['GET'])
 def download():
     try:
@@ -40,8 +28,20 @@ def download():
             flash("Unable to get resume.")
             return redirect(url_for('home'))
     except Exception as e:
-        flash(f"Message: {e}")
+        flash(f"Unable to get resume.")
         return redirect(url_for('home'))
+
+def send_email(name, email, message):
+    with app.app_context():
+        recipients = config('RECIPIENTS').split(',')
+        msg = Message(
+            f"Message from {name} via portfolio",
+            sender=email,
+            recipients=recipients
+        )
+        msg.body = message
+        msg.body += f"\n\nFrom: {email}"
+        current_app.mail.send(msg)
 
 @app.route("/contact", methods=['GET', 'POST'])
 def contact():
