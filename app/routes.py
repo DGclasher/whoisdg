@@ -5,7 +5,10 @@ from app import app
 from io import BytesIO
 from decouple import config
 from flask_mail import Message
-from flask import render_template, request, current_app, flash, url_for, redirect, send_file
+from flask import ( render_template,
+                   request, current_app, 
+                   flash, url_for, 
+                   redirect, send_file )
 
 @app.route("/")
 def home():

@@ -8,3 +8,9 @@ body {
    color: white;
    font-family: 'Ubuntu', sans-serif;
  }
+
+ @media (max-width: 767px) {
+   .hidden {
+    display: none;
+  }
+}
