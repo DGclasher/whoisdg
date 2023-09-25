@@ -1,5 +1,6 @@
 import requests
 import threading
+import feedparser
 from app import app
 from io import BytesIO
 from decouple import config
@@ -31,6 +32,13 @@ def download():
         flash(f"Unable to get resume.")
         return redirect(url_for('home'))
 
+@app.route('/blogs', methods=['GET'])
+def blogs():
+    rss_url = config('RSS_URL')
+    feed = feedparser.parse(rss_url)
+    blogs = [{'title':entry['title'], 'author':entry['author'], 'published':entry['published'], 'link':entry['link']} for entry in feed['entries']]
+    return render_template('blogs.html', blogs=blogs)
+    
 def send_email(name, email, message):
     with app.app_context():
         recipients = config('RECIPIENTS').split(',')
