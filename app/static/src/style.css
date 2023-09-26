@@ -19,19 +19,6 @@ body {
   transition: background-color 0.3s ease;
 }
 
-.wrapper {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-.footer {
-  margin-top: auto;
-  color: white;
-  text-align: center;
-  padding: 10px;
-}
-
 nav.pagination-container {
   display: flex;
   justify-content: center;
