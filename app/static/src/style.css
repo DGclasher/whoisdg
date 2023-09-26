@@ -9,8 +9,12 @@ body {
    font-family: 'Ubuntu', sans-serif;
  }
 
- @media (max-width: 767px) {
-   .hidden {
-    display: none;
-  }
+#menuToggle {
+  padding: 0.5rem; 
+  cursor: pointer;
+}
+
+#menuToggle:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: background-color 0.3s ease;
 }

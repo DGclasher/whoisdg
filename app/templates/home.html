@@ -3,12 +3,12 @@
   Home
 {% endblock title %}
 {% block head %}
-  <link rel="stylesheet" href="/static/style/glitch.css">
+  <link rel="stylesheet" href="/static/src/glitch.css">
 {% endblock head %}
 {% block body %}
-<div class=" mt-2 py-1 px-4">
+<div class="mt-2 py-1 px-4">
   <div class="flex flex-col items-center mt-20 py-10">
-    <h1 class="text-3xl md:text-6xl glitch">DEBA GHOSH</h1>
+    <h1 class="text-sm md:text-4xl glitch sm:text-xl">DEBA GHOSH</h1>
     <div class="max-w-[800px] mx-auto my-0;">
       <div class="flex md:text-xl text-lg mt-2 p-2 md:py-5 text-white text-center mb-5">
         <p>Computer Science undergrad passionate about Cybersecurity and DevOps. Committed to mastering both realms for enhanced digital security and agile software development.</p>
@@ -16,7 +16,7 @@
     </div>
     <div class="p-2 mb-2 items-center">
       <form action="{{url_for('download')}}">
-        <button type="submit" class="bg-lime-800 hover:bg-lime-900 text-black rounded-xl p-2">Download Resume</button>
+        <button type="submit" class="bg-lime-800 hover:bg-lime-900 text-white rounded-xl p-2">Download Resume</button>
       </form>
     </div>
     <div class="items-center p-2 mb-4">

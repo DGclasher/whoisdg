@@ -3,54 +3,40 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/08bdce0f96.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/static/style/style.css" />
     <link rel="icon" href="/static/images/android-chrome-512x512.png" type="image/png">
-    <script defer src="/static/script/script.js"></script>
+
+    <link rel="stylesheet" href="{{url_for('static', filename='src/main.css')}}" />
+    <link rel="stylesheet" href="/static/src/style.css" />
+    <script defer src="/static/src/script.js"></script>
+
     <title>whoisdg - {% block title %} {% endblock title %}</title>
     {% block head %} {% endblock head %}
   </head>
   <body class="bg-black h-screen">
-    <header class="fixed top-0 left-0 w-full bg-zinc-900 backdrop-blur-md bg-opacity-50 h-16 p-4 text-lime-600 z-10 header">
-      
-        <ul>
-          <li class="mx-2 md:mx-10">
-            <a class="hover:text-lime-50" href="{{url_for('home')}}">HOME</a>
-          </li>
-          <li class="mx-2 md:mx-10">
-            <a class="hover:text-lime-50" href="{{url_for('blogs')}}">BLOGS</a>
-          </li>
-          <li class="mx-2 md:mx-10">
-            <a href="{{url_for('contact')}}" class="hover:text-lime-50">CONTACT</a>
-          </li>
-        
-        
-        <li class="md:hidden">
-          <a href="javascript:void(0);" id="menuToggle" class="hover:text-lime-50">
-            <i class="fa-solid fa-bars"></i>
-          </a>
+    <header class="fixed top-0 left-0 w-full bg-zinc-900 backdrop-blur-md bg-opacity-50 h-14 md:h-16 p-4 text-lime-600 z-10 flex justify-end items-center">
+      <button class="block md:hidden group" id="menuToggle">
+        <i class="fa-solid fa-bars text-lg"></i>
+        <div class="absolute top-14 bottom-10 -right-full h-screen w-8/12 bg-zinc-950 transform group-focus:right-0 group-focus:bg-opacity-95 group-focus:backdrop-blur-md transition-all duration-300 hidden" id="sideMenu">
+          <ul class="flex flex-col items-center w-full text-base cursor-pointer pt-10">
+            <li class="py-4 px-6 w-full"><a href="{{url_for('home')}}" class="hover:text-lime-50">HOME</a></li>
+            <li class="py-4 px-6 w-full"><a href="{{url_for('blogs')}}" class="hover:text-lime-50">BLOGS</a></li>
+            <li class="py-4 px-6 w-full"><a href="{{url_for('contact')}}" class="hover:text-lime-50">CONTACT</a></li>
+          </ul>
+        </div>
+      </button>
+      <ul class="hidden md:flex h-full items-center text-lg md:text-xl justify-end">
+        <li class="mx-2 md:mx-10">
+          <a class="hover:text-lime-50" href="{{url_for('home')}}">HOME</a>
+        </li>
+        <li class="mx-2 md:mx-10">
+          <a class="hover:text-lime-50" href="{{url_for('blogs')}}">BLOGS</a>
+        </li>
+        <li class="mx-2 md:mx-10">
+          <a href="{{url_for('contact')}}" class="hover:text-lime-50">CONTACT</a>
         </li>
       </ul>
     </header>
-    <div id="sideMenu" class="hidden fixed top-0 left-0 w-0 h-full bg-zinc-900 backdrop-blur-md bg-opacity-50 text-lime-600 z-20 overflow-x-hidden transition-all duration-300">
-      <a href="javascript:void(0);" id="menuClose" class="absolute top-4 right-4 text-2xl">
-        <i class="fa-solid fa-xmark"></i>
-      </a>
-      <ul class="mt-16">
-        <li>
-          <a href="{{url_for('home')}}" class="block py-3 px-6 hover:bg-lime-600 hover:text-white">HOME</a>
-        </li>
-        <li>
-          <a href="{{url_for('blogs')}}" class="block py-3 px-6 hover:bg-lime-600 hover:text-white">BLOGS</a>
-        </li>
-        <li>
-          <a href="{{url_for('contact')}}" class="block py-3 px-6 hover:bg-lime-600 hover:text-white">CONTACT</a>
-        </li>
-      </ul>
-    </div>
-    
-    
     <div class="z-1 h-full">
       {% block body %}
       {% endblock body %}

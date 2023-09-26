@@ -3,16 +3,19 @@
     Blogs
 {% endblock title %}
 {% block body %}
-<div class="p-5 mt-10">
-    {% if blogs %}
-    {% for blog in blogs %}
-    <div>
-        <p>{{blog.title}}</p>
-        <p>{{blog.author}}</p>
-        <p>{{blog.time}}</p>
-        <a href="{{blog.link}}" target="_blank">Go to post</a>
+<div class="p-5 mt-10 md:mt-20 text-center">
+    <h2 class="p-2 mb-3 text-2xl md:text-3xl">Blogs</h2>
+    <div class="max-w-lg mx-auto">
+        {% if blogs %}
+        {% for blog in blogs %}
+        <div class="mb-4 border rounded-lg p-4 sm:max-w-md md:max-w-xl lg:max-w-xl xl:max-w-2xl mx-auto">
+            <h2 class="text-xl font-semibold">{{ blog.title }}</h2>
+            <p class="text-sm text-gray-600">By {{ blog.author }} - {{ blog.published }}</p>
+            <p class="mt-2">{{ blog.summary }}</p>
+            <a class="text-lime-600 hover:underline" href="{{ blog.link }}" target="_blank">Read more</a>
+        </div>
+        {% endfor %}
+        {% endif %}
     </div>
-    {% endfor %}
-    {% endif %}
 </div>
 {% endblock body %}

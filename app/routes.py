@@ -1,3 +1,4 @@
+import re
 import requests
 import threading
 import feedparser
@@ -35,11 +36,21 @@ def download():
         flash(f"Unable to get resume.")
         return redirect(url_for('home'))
 
+def get_summary(full_summary):
+    summary = re.sub(r'<.*?>','',full_summary)
+    words = summary.split(" ")
+    if len(words) < 20:
+        return summary + " ..."
+    summary = ""
+    summary = " ".join(words[i] for i in range(0, 20))
+    summary += " ..."
+    return summary
+
 @app.route('/blogs', methods=['GET'])
 def blogs():
     rss_url = config('RSS_URL')
     feed = feedparser.parse(rss_url)
-    blogs = [{'title':entry['title'], 'author':entry['author'], 'published':entry['published'], 'link':entry['link']} for entry in feed['entries']]
+    blogs = [{'title':entry['title'], 'author':entry['author'], 'summary':get_summary(entry['summary']), 'published':entry['published'], 'link':entry['link']} for entry in feed['entries']]
     return render_template('blogs.html', blogs=blogs)
     
 def send_email(name, email, message):
