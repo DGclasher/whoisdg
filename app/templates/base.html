@@ -14,7 +14,8 @@
     {% block head %} {% endblock head %}
   </head>
   <body class="bg-black h-screen">
-    <header class="fixed top-0 left-0 w-full bg-zinc-900 backdrop-blur-md bg-opacity-50 h-14 md:h-16 p-4 text-lime-600 z-10 flex justify-end items-center">
+    <div class="wrapper">
+      <header class="fixed top-0 left-0 w-full bg-zinc-900 backdrop-blur-md bg-opacity-50 h-14 md:h-16 p-4 text-lime-600 z-10 flex justify-end items-center">
       <button class="block md:hidden group" id="menuToggle">
         <i class="fa-solid fa-bars text-lg"></i>
         <div class="absolute top-14 bottom-10 -right-full h-screen w-8/12 bg-zinc-950 transform group-focus:right-0 group-focus:bg-opacity-95 group-focus:backdrop-blur-md transition-all duration-300 hidden" id="sideMenu">
@@ -41,12 +42,13 @@
       {% block body %}
       {% endblock body %}
     </div>
-    <div class="bottom-0 left-0 p-4 text-white text-sm md:text-base w-full bg-zinc-900 backdrop-blur-md bg-opacity-50 text-center fixed z-50">
-      &copy;
-      <script>
-        document.write(new Date().getFullYear());
-      </script>
-      DGclasher
-    </div>
+  </div>
+  <div class="footer bg-zinc-900 backdrop-blur-md bg-opacity-60">
+    &copy;
+    <script>
+      document.write(new Date().getFullYear());
+    </script>
+    DGclasher
+  </div>
   </body>
 </html>
