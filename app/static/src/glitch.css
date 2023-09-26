@@ -1,5 +1,5 @@
 .glitch {
-  font-size: 8rem;
+  font-size: 3.5rem;
   font-weight: 700;
   text-transform: uppercase;
   position: relative;
@@ -9,6 +9,12 @@
     0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
 
   animation: glitch 500ms infinite;
+}
+
+@media (max-width: 640px) {
+  .glitch {
+    font-size: 2rem;
+  }
 }
 
 .glitch span {
