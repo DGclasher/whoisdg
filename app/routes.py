@@ -1,4 +1,5 @@
 import re
+import json
 import requests
 import threading
 import feedparser
@@ -6,6 +7,7 @@ from app import app
 from io import BytesIO
 from decouple import config
 from flask_mail import Message
+from flask_paginate import Pagination
 from flask import ( render_template,
                    request, current_app, 
                    flash, url_for, 
@@ -48,10 +50,20 @@ def get_summary(full_summary):
 
 @app.route('/blogs', methods=['GET'])
 def blogs():
-    rss_url = config('RSS_URL')
-    feed = feedparser.parse(rss_url)
-    blogs = [{'title':entry['title'], 'author':entry['author'], 'summary':get_summary(entry['summary']), 'published':entry['published'], 'link':entry['link']} for entry in feed['entries']]
-    return render_template('blogs.html', blogs=blogs)
+    # rss_url = config('RSS_URL')
+    # feed = feedparser.parse(rss_url)
+    with open("./tests/sample_posts.json", "r") as f:
+        feed = json.loads(f.read())
+    page = int(request.args.get('page', 1))
+    per_page = 5
+    offset = (page - 1) * per_page
+    blogs = [{'title': entry['title'], 'author': entry['author'], 'summary': get_summary(entry['summary']),
+                        'published': entry['published'], 'link': entry['link']} for entry in feed['entries']]
+    total = len(blogs)
+    total_pages = (total + per_page - 1) // per_page
+    items_pagination = blogs[offset:offset+per_page]
+    pagination = Pagination(page=page, per_page=per_page, offset=offset, total=total)
+    return render_template('blogs.html', blogs=blogs, pagination=pagination, items=items_pagination, total_pages=total_pages)
     
 def send_email(name, email, message):
     with app.app_context():
