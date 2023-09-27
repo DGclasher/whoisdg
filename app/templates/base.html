@@ -15,35 +15,44 @@
   </head>
   <body class="bg-black h-screen">
     <div class="flex flex-col min-h-screen">
-      <header class="fixed top-0 left-0 w-full bg-zinc-900 backdrop-blur-md bg-opacity-50 h-14 md:h-16 p-4 text-lime-600 z-10 flex justify-end items-center">
-      <button class="block md:hidden group" id="menuToggle">
-        <i class="fa-solid fa-bars text-lg"></i>
-        <div class="absolute top-14 bottom-10 -right-full h-screen w-8/12 bg-zinc-950 transform group-focus:right-0 group-focus:bg-opacity-95 group-focus:backdrop-blur-md transition-all duration-300 hidden" id="sideMenu">
-          <ul class="flex flex-col items-center w-full text-base cursor-pointer pt-10">
-            <li class="py-4 px-6 w-full"><a href="{{url_for('home')}}" class="hover:text-lime-50">HOME</a></li>
-            <li class="py-4 px-6 w-full"><a href="{{url_for('blogs')}}" class="hover:text-lime-50">BLOGS</a></li>
-            <li class="py-4 px-6 w-full"><a href="{{url_for('contact')}}" class="hover:text-lime-50">CONTACT</a></li>
-          </ul>
+      <header class="fixed top-0 left-0 w-full bg-zinc-900 backdrop-blur-sm bg-opacity-50 h-14 md:h-16 p-4 text-lime-600 z-10 flex items-center justify-between">
+        <div class="text-xl md:text-2xl font-bold text-lime-600">
+          <a href="{{url_for('home')}}" class="hover:text-lime-50">DG</a>
         </div>
-      </button>
-      <ul class="hidden md:flex h-full items-center text-lg md:text-xl justify-end">
-        <li class="mx-2 md:mx-10">
-          <a class="hover:text-lime-50" href="{{url_for('home')}}">HOME</a>
-        </li>
-        <li class="mx-2 md:mx-10">
-          <a class="hover:text-lime-50" href="{{url_for('blogs')}}">BLOGS</a>
-        </li>
-        <li class="mx-2 md:mx-10">
-          <a href="{{url_for('contact')}}" class="hover:text-lime-50">CONTACT</a>
-        </li>
-      </ul>
-    </header>
+        <button class="block md:hidden group" id="menuToggle">
+          <i class="fa-solid fa-bars text-lg"></i>
+          <div class="absolute top-14 bottom-10 -right-full h-screen w-8/12 bg-zinc-950 transform group-focus:right-0 group-focus:bg-opacity-95 transition-all duration-300 hidden" id="sideMenu">
+            <ul class="flex flex-col items-center w-full text-base cursor-pointer pt-10">
+              <li class="py-4 px-6 w-3/4 border-b border-gray-600">
+                <a href="{{url_for('home')}}" class="hover:text-lime-50">HOME</a>
+              </li>
+              <li class="py-4 px-6 w-3/4 border-b border-gray-600">
+                <a href="{{url_for('blogs')}}" class="hover:text-lime-50">BLOGS</a>
+              </li>
+              <li class="py-4 px-6">
+                <a href="{{url_for('contact')}}" class="hover:text-lime-50">CONTACT</a>
+              </li>
+            </ul>
+          </div>
+        </button>
+        <ul class="hidden md:flex h-full items-center text-lg md:text-xl justify-end">
+          <li class="mx-2 md:mx-10">
+            <a class="hover:text-lime-50" href="{{url_for('home')}}">HOME</a>
+          </li>
+          <li class="mx-2 md:mx-10">
+            <a class="hover:text-lime-50" href="{{url_for('blogs')}}">BLOGS</a>
+          </li>
+          <li class="mx-2 md:mx-10">
+            <a href="{{url_for('contact')}}" class="hover:text-lime-50">CONTACT</a>
+          </li>
+        </ul>
+      </header>      
     <div class="z-1 h-full">
       {% block body %}
       {% endblock body %}
     </div>
   </div>
-  <div class="mt-auto text-white text-center p-3 md:p-4 bg-zinc-900 backdrop-blur-md bg-opacity-60">
+  <div class="mt-auto text-white text-center text-xs md:text-sm p-2 bg-zinc-900">
     &copy;
     <script>
       document.write(new Date().getFullYear());
