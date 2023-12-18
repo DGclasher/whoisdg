@@ -8,3 +8,4 @@ Flask-Mail==0.9.1
 MarkupSafe==2.1.2
 feedparser==6.0.10
 flask-paginate==2022.1.8
+werkzeug>=3.0.1 # not directly required, pinned by Snyk to avoid a vulnerability
