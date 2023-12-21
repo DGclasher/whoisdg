@@ -1,5 +1,6 @@
 import re
 import json
+import random
 import requests
 import threading
 import feedparser
@@ -52,6 +53,8 @@ def get_summary(full_summary):
 def get_proxy():
     res = requests.get('https://api.proxyscrape.com/v2/?request=displayproxies&protocol=http&timeout=10000&country=all&ssl=all&anonymity=all')
     proxy = res.text.split('\r\n')
+    proxy = random.choice(proxy)
+    print(proxy)
     return proxy
 
 @app.route('/blogs', methods=['GET'])
