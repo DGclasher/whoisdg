@@ -7,6 +7,7 @@ from app import app
 from io import BytesIO
 from decouple import config
 from flask_mail import Message
+from urllib.request import ProxyHandler
 from flask_paginate import Pagination
 from flask import ( render_template,
                    request, current_app, 
@@ -48,10 +49,17 @@ def get_summary(full_summary):
     summary += " ..."
     return summary
 
+def get_proxy():
+    res = requests.get('https://api.proxyscrape.com/v2/?request=displayproxies&protocol=http&timeout=10000&country=all&ssl=all&anonymity=all')
+    proxy = res.text.split('\r\n')
+    return proxy
+
 @app.route('/blogs', methods=['GET'])
 def blogs():
+    proxy = get_proxy()
+    proxy_handler = ProxyHandler({'http': f"http://{proxy}"})
     rss_url = config('RSS_URL')
-    feed = feedparser.parse(rss_url)
+    feed = feedparser.parse(rss_url, handlers=[proxy_handler])
     page = int(request.args.get('page', 1))
     per_page = 5
     offset = (page - 1) * per_page
