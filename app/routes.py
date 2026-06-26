@@ -18,6 +18,10 @@ from flask import ( render_template,
 def home():
     return render_template("home.html")
 
+@app.route("/projects")
+def projects():
+    return render_template("projects.html")
+
 @app.route("/download", methods=['GET'])
 def download():
     try:
@@ -45,7 +49,7 @@ def get_summary(full_summary):
     if len(words) < 20:
         return summary + " ..."
     summary = ""
-    summary = " ".join(words[i] for i in range(0, 20))
+    summary = " ".join(words[i] for i in range(0, 50))
     summary += " ..."
     return summary
 
@@ -56,12 +60,12 @@ def get_proxy():
 
 @app.route('/blogs', methods=['GET'])
 def blogs():
-    # proxy = get_proxy()
-    # proxy_handler = ProxyHandler({'http': f"http://{proxy}"})
-    # rss_url = config('RSS_URL')
-    # feed = feedparser.parse(rss_url, handlers=[proxy_handler])
+    proxy = get_proxy()
+    proxy_handler = ProxyHandler({'http': f"http://{proxy}"})
+    rss_url = config('RSS_URL')
+    feed = feedparser.parse(rss_url, handlers=[proxy_handler])
     # with open("./tests/sample_posts.json", "r") as f:
-        # feed = json.loads(f.read())
+    #     feed = json.loads(f.read())
     page = int(request.args.get('page', 1))
     per_page = 5
     offset = (page - 1) * per_page

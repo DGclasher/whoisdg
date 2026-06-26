@@ -1,0 +1,16 @@
+[
+  {
+    "title": "The Microservice Arch",
+    "description": "This project demonstrates a Spring Boot microservice architecture using Spring Cloud, Eureka service discovery, API Gateway routing, Kafka messaging, database-backed services, distributed tracing, and Docker-based local infrastructure.",
+    "tags": ["Java", "Spring Boot", "Microservices", "Kafka", "Docker"],
+    "repo": "https://github.com/DGclasher/the-microservice-arch",
+    "demo": "https://github.com/DGclasher/the-microservice-arch"
+  },
+  {
+    "title": "Finsage",
+    "description": "Finsage is a full-stack personal finance management application built with Next.js and Spring Boot, featuring secure JWT and Google OAuth2 authentication, PostgreSQL for data storage, and Redis caching to provide fast, scalable tracking of incomes, expenses, and investments.",
+    "tags": ["Next.js", "Spring Boot", "PostgreSQL", "Redis", "JWT", "OAuth2"],
+    "repo": "https://github.com/DGclasher/finsage-api",
+    "demo": "https://github.com/DGclasher/finsage"
+  }
+]

@@ -1,63 +1,107 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://kit.fontawesome.com/08bdce0f96.js" crossorigin="anonymous"></script>
-    <link rel="icon" href="/static/images/android-chrome-512x512.png" type="image/png">
+    <script
+      src="https://kit.fontawesome.com/08bdce0f96.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="icon"
+      href="/static/images/android-chrome-512x512.png"
+      type="image/png"
+    />
 
-    <link rel="stylesheet" href="{{url_for('static', filename='src/main.css')}}" />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='src/main.css')}}"
+    />
     <link rel="stylesheet" href="/static/src/style.css" />
     <script defer src="/static/src/script.js"></script>
 
     <title>whoisdg - {% block title %} {% endblock title %}</title>
     {% block head %} {% endblock head %}
   </head>
-  <body class="bg-black h-screen">
+  <body class="bg-slate-950 text-white min-h-screen">
     <div class="flex flex-col min-h-screen">
-      <header class="fixed top-0 left-0 w-full bg-zinc-900 backdrop-blur-sm bg-opacity-50 h-14 md:h-16 p-4 text-lime-600 z-10 flex items-center justify-between">
-        <div class="text-xl md:text-2xl font-bold text-lime-600">
-          <a href="{{url_for('home')}}" class="hover:text-lime-50">DG</a>
+      <header
+        class="fixed top-0 left-0 w-full bg-zinc-950/95 backdrop-blur-xl border-b border-white/5 h-16 md:h-20 px-4 md:px-8 text-lime-400 z-20 flex items-center justify-between"
+      >
+        <div class="flex items-center gap-4">
+          <a
+            href="{{url_for('home')}}"
+            class="text-xl md:text-2xl font-semibold tracking-[0.18em] uppercase text-lime-300 hover:text-white"
+            >DG</a
+          >
+          <!-- <span class="hidden md:inline text-slate-400">portfolio</span> -->
         </div>
-        <button class="block md:hidden group" id="menuToggle">
+
+        <button
+          class="relative block md:hidden p-2 rounded-lg border border-white/10 bg-white/5"
+          id="menuToggle"
+          aria-label="Toggle navigation"
+        >
           <i class="fa-solid fa-bars text-lg"></i>
-          <div class="absolute top-14 bottom-10 -right-full h-screen w-8/12 bg-zinc-950 transform group-focus:right-0 group-focus:bg-opacity-95 transition-all duration-300 hidden" id="sideMenu">
-            <ul class="flex flex-col items-center w-full text-base cursor-pointer pt-10">
-              <li class="py-4 px-6 w-3/4 border-b border-gray-600">
-                <a href="{{url_for('home')}}" class="hover:text-lime-50">HOME</a>
-              </li>
-              <li class="py-4 px-6 w-3/4 border-b border-gray-600">
-                <a href="{{url_for('blogs')}}" class="hover:text-lime-50">BLOGS</a>
-              </li>
-              <li class="py-4 px-6">
-                <a href="{{url_for('contact')}}" class="hover:text-lime-50">CONTACT</a>
-              </li>
-            </ul>
-          </div>
         </button>
-        <ul class="hidden md:flex h-full items-center text-lg md:text-xl justify-end">
-          <li class="mx-2 md:mx-10">
-            <a class="hover:text-lime-50" href="{{url_for('home')}}">HOME</a>
-          </li>
-          <li class="mx-2 md:mx-10">
-            <a class="hover:text-lime-50" href="{{url_for('blogs')}}">BLOGS</a>
-          </li>
-          <li class="mx-2 md:mx-10">
-            <a href="{{url_for('contact')}}" class="hover:text-lime-50">CONTACT</a>
-          </li>
-        </ul>
-      </header>      
-    <div class="z-1 h-full">
-      {% block body %}
-      {% endblock body %}
+
+        <div
+          class="hidden md:flex items-center gap-8 text-sm md:text-base font-medium uppercase tracking-[0.18em]"
+        >
+          <a class="hover:text-white transition" href="{{url_for('home')}}"
+            >Home</a
+          >
+          <a class="hover:text-white transition" href="{{url_for('projects')}}"
+            >Projects</a
+          >
+          <a class="hover:text-white transition" href="{{url_for('blogs')}}"
+            >Blogs</a
+          >
+          <a class="hover:text-white transition" href="{{url_for('contact')}}"
+            >Contact</a
+          >
+        </div>
+
+        <div
+          class="absolute top-16 right-0 bottom-0 left-0 bg-zinc-950/75 backdrop-blur-xl transform translate-x-full transition-transform duration-300 ease-in-out md:hidden"
+          id="sideMenu"
+        >
+          <div class="flex h-full flex-col justify-start pt-8 px-6 gap-4">
+            <a
+              class="block rounded-2xl bg-white/5 px-4 py-3 text-center uppercase tracking-[0.2em] text-slate-100 hover:bg-lime-600/15"
+              href="{{url_for('home')}}"
+              >Home</a
+            >
+            <a
+              class="block rounded-2xl bg-white/5 px-4 py-3 text-center uppercase tracking-[0.2em] text-slate-100 hover:bg-lime-600/15"
+              href="{{url_for('projects')}}"
+              >Projects</a
+            >
+            <a
+              class="block rounded-2xl bg-white/5 px-4 py-3 text-center uppercase tracking-[0.2em] text-slate-100 hover:bg-lime-600/15"
+              href="{{url_for('blogs')}}"
+              >Blogs</a
+            >
+            <a
+              class="block rounded-2xl bg-white/5 px-4 py-3 text-center uppercase tracking-[0.2em] text-slate-100 hover:bg-lime-600/15"
+              href="{{url_for('contact')}}"
+              >Contact</a
+            >
+          </div>
+        </div>
+      </header>
+      <div class="z-1 h-full pt-20 md:pt-24">
+        {% block body %} {% endblock body %}
+      </div>
     </div>
-  </div>
-  <div class="mt-auto text-white text-center text-xs md:text-sm p-2 bg-zinc-900">
-    &copy;
-    <script>
-      document.write(new Date().getFullYear());
-    </script>
-    DGclasher
-  </div>
+    <div
+      class="mt-auto text-white text-center text-xs md:text-sm p-2 bg-zinc-900"
+    >
+      &copy;
+      <script>
+        document.write(new Date().getFullYear());
+      </script>
+      DGclasher
+    </div>
   </body>
 </html>

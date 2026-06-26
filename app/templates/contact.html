@@ -1,40 +1,98 @@
-{% extends 'base.html' %}
-{% block title %}
-    Contact
-{% endblock title %}
-{% block body %}
-<div class="flex flex-col md:flex-row py-20 px-8 md:p-20 md:px-8 gap-10">
-  <div class="flex flex-col gap-4 md:w-full p-2 md:p-4">
-      <h2 class="text-2xl">Send a message</h2>
-      <form action="{{url_for('contact')}}" method="post">
-          <div class="flex flex-col gap-4">
-              <input class="w-full md:w-2/3 px-4 py-2 bg-zinc-900 text-white rounded-md" type="text" name="name" placeholder="Your Name" required>
-              <input class="w-full md:w-2/3 px-4 py-2 bg-zinc-900 text-white rounded-md" type="email" name="email" placeholder="Your Email ID" required>
-              <textarea class="w-full md:w-2/3 px-4 py-2 rounded-md bg-zinc-900 text-white resize-none md:resize-y" name="message" cols="30" rows="10" placeholder="Your message" required></textarea>
-              <button type="submit" class="w-full md:w-2/3 px-4 py-2 rounded-md bg-lime-700 hover:bg-lime-800 transition-colors text-white">Send</button>
-          </div>
+{% extends 'base.html' %} {% block title %} Contact {% endblock title %} {%
+block body %}
+<div class="mx-auto max-w-5xl px-4 py-16 md:px-8">
+  <div class="grid gap-10 lg:grid-cols-[1.2fr_0.8fr]">
+    <div
+      class="rounded-[32px] border border-white/10 bg-slate-950/80 p-8 shadow-2xl shadow-black/20 backdrop-blur-xl"
+    >
+      <p class="text-sm uppercase tracking-[0.3em] text-lime-400">
+        Get in touch
+      </p>
+      <h1 class="mt-4 text-3xl font-semibold text-white">
+        Let’s connect.
+      </h1>
+      <p class="mt-3 text-slate-400">
+        Send a message and I’ll respond as soon as possible.
+      </p>
+      <form
+        action="{{url_for('contact')}}"
+        method="post"
+        class="mt-8 space-y-6"
+      >
+        <div class="grid gap-4 sm:grid-cols-2">
+          <input
+            class="w-full rounded-3xl border border-white/10 bg-zinc-950/90 px-5 py-4 text-white placeholder:text-slate-500 focus:border-lime-500 focus:outline-none"
+            type="text"
+            name="name"
+            placeholder="Your Name"
+            required
+          />
+          <input
+            class="w-full rounded-3xl border border-white/10 bg-zinc-950/90 px-5 py-4 text-white placeholder:text-slate-500 focus:border-lime-500 focus:outline-none"
+            type="email"
+            name="email"
+            placeholder="Your Email"
+            required
+          />
+        </div>
+        <textarea
+          class="w-full rounded-[28px] border border-white/10 bg-zinc-950/90 px-5 py-4 text-white placeholder:text-slate-500 focus:border-lime-500 focus:outline-none min-h-[180px]"
+          name="message"
+          placeholder="Your message"
+          required
+        ></textarea>
+        <div class="flex justify-end">
+          <button
+            type="submit"
+            class="inline-flex items-center justify-center rounded-full bg-lime-600 px-7 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-slate-950 transition hover:bg-lime-500"
+          >
+            Send Message
+          </button>
+        </div>
       </form>
-      {% with flashed_messages = get_flashed_messages() %}
-      {% if flashed_messages %}  
-      <div class="popup-message" id="popupMessage">
-        <div class="popup-content p-3">
-            <span class="popup-message-text" id="popupMessageText">{{ flashed_messages | join }}</span>
+      {% with flashed_messages = get_flashed_messages() %} {% if
+      flashed_messages %}
+      <div
+        class="mt-6 rounded-3xl border border-lime-600/20 bg-lime-600/10 p-4 text-sm text-lime-200"
+      >
+        {{ flashed_messages | join }}
+      </div>
+      {% endif %} {% endwith %}
+    </div>
+
+    <aside
+      class="rounded-[32px] border border-white/10 bg-slate-950/80 p-8 shadow-2xl shadow-black/20 backdrop-blur-xl"
+    >
+      <p class="text-sm uppercase tracking-[0.3em] text-slate-400">Profiles</p>
+      <div class="mt-6 grid gap-4">
+        <a
+          href="https://linktr.ee/dgclasher"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center gap-3 rounded-3xl border border-white/10 bg-black/40 px-4 py-4 text-white transition hover:border-lime-500 hover:bg-white/5"
+        >
+          <img
+            src="/static/images/linktree.png"
+            alt="Linktree Logo"
+            class="w-12 h-auto"
+          />
+          <div>
+            <p class="font-semibold">Linktree</p>
+            <p class="text-slate-500 text-sm">All profiles in one place</p>
+          </div>
+        </a>
+        <div class="rounded-3xl border border-white/10 bg-black/40 p-4">
+          <p class="text-sm uppercase tracking-[0.18em] text-slate-400">
+            Email
+          </p>
+          <a
+            href="mailto:dgclasher@proton.me"
+            class="mt-2 block text-lg font-semibold text-lime-400"
+            >dgclasher@proton.me</a
+          >
         </div>
       </div>
-      {% endif %}
-      {% endwith %}
-  </div>
-  <div class="md:w-1/2 p-2 md:p-4">
-      <h2 class="text-2xl mb-2">Profiles</h2>
-      <div class="bg-zinc-900 text-white p-4 rounded-md flex flex-col items-center justify-center">
-          <a href="https://linktr.ee/dgclasher" target="_blank" rel="noopener noreferrer">
-              <img src="/static/images/linktree.png" alt="Linktree Logo" class="w-20 h-auto">
-          </a>
-      </div>
-      <h2 class="text-2xl mb-2 mt-5">Contact</h2>
-      <div class="bg-zinc-900 text-white p-4 rounded-md flex flex-col">
-          <a href="mailto:dgclasher@proton.me" class="text-lime-700">dgclasher@proton.me</a>
-      </div>
+    </aside>
   </div>
 </div>
 {% endblock body %}

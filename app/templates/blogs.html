@@ -1,68 +1,106 @@
-{% extends 'base.html' %}
-{% block title %}
-    Blogs
-{% endblock title %}
-{% block body %}
-<div class="p-5 mt-10 md:mt-20 text-center">
-    <div class="border-b border-gray-800">
-        <h2 class="p-2 mb-3 text-2xl md:text-3xl">Blogs</h2>
+{% extends 'base.html' %} {% block title %} Blogs {% endblock title %} {% block
+body %}
+<div class="mx-auto w-full max-w-6xl px-4 py-10 md:px-8 md:py-16">
+  <section
+    class="relative overflow-hidden rounded-[32px] border border-white/10 bg-gradient-to-br from-zinc-950/80 to-slate-900/70 p-8 shadow-2xl shadow-black/30"
+  >
+    <div
+      class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(132,204,22,0.18),_transparent_25%)] pointer-events-none"
+    ></div>
+
+    <div class="relative space-y-4 text-center">
+      <p class="text-sm uppercase tracking-[0.35em] text-lime-500">Insights</p>
+
+      <h1 class="text-3xl md:text-4xl font-semibold text-white">
+        Cybersecurity & Software Engineering Insights
+      </h1>
+
+      <p class="mx-auto max-w-2xl text-slate-400 md:text-lg">
+        Articles exploring secure software development, cybersecurity concepts,
+        backend engineering, and practical solutions to real-world technical
+        challenges.
+      </p>
     </div>
-    <div class="max-w-lg mx-auto">
-        {% if blogs %}
-        {% for blog in items %}
-        <div class="mb-4 border-b p-4 border-gray-700 sm:max-w-md md:max-w-xl lg:max-w-xl xl:max-w-2xl mx-auto">
-            <h2 class="text-xl font-semibold">{{ blog.title }}</h2>
-            <p class="text-sm text-gray-600">By {{ blog.author }} - {{ blog.published }}</p>
-            <p class="mt-2">{{ blog.summary }}</p>
-            <a class="text-lime-600 hover:underline" href="{{ blog.link }}" target="_blank">Read more</a>
+  </section>
+
+  <div class="mt-10 space-y-6">
+    {% if blogs %} {% for blog in items %}
+    <article
+      class="glass-card rounded-[28px] border border-white/10 bg-black/40 p-6 shadow-2xl shadow-black/20 backdrop-blur-xl"
+    >
+      <div class="flex flex-col gap-3">
+        <div
+          class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"
+        >
+          <h2 class="text-2xl font-semibold text-white">{{ blog.title }}</h2>
+          <p class="text-sm uppercase tracking-[0.18em] text-slate-500">
+            {{ blog.published }}
+          </p>
         </div>
-        {% endfor %}
-        {% endif %}
+        <p class="text-sm text-slate-400">By {{ blog.author }}</p>
+        <p class="text-base leading-7 text-slate-300">{{ blog.summary }}</p>
+        <div class="pt-4">
+          <a
+            class="inline-flex items-center rounded-full border border-lime-500/20 bg-lime-500/10 px-4 py-2 text-sm font-semibold text-lime-300 transition hover:bg-lime-500/20"
+            href="{{ blog.link }}"
+            target="_blank"
+            >Read more</a
+          >
+        </div>
+      </div>
+    </article>
+    {% endfor %} {% else %}
+    <div
+      class="glass-card rounded-[28px] border border-white/10 bg-black/40 p-6 shadow-2xl shadow-black/20 backdrop-blur-xl text-slate-300"
+    >
+      No blog posts are available at the moment.
     </div>
-    <nav class="mt-4 flex flex-row justify-center">
-        <ul class="pagination">
-            {% if pagination.has_prev %}
-                <li class="page-item">
-                    <a class="page-link" href="?page=1" aria-label="First">
-                        <span aria-hidden="true">&laquo;&laquo;</span>
-                    </a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ pagination.page - 1 }}" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-            {% endif %}
-            
-            {% for page_num in range(1, total_pages + 1) %}
-                {% if page_num == 1 or page_num == total_pages or 
-                   (pagination.page - 1 <= page_num <= pagination.page + 1) %}
-                    <li class="page-item {% if page_num == pagination.page %}active{% endif %}">
-                        <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
-                    </li>
-                {% elif (page_num == 2 and pagination.page > 4) %}
-                    <li class="page-item">
-                        <span class="page-link">...</span>
-                    </li>
-                {% elif (page_num == total_pages - 1 and pagination.page < total_pages - 3) %}
-                    <li class="page-item">
-                        <span class="page-link">...</span>
-                    </li>
-                {% endif %}
-            {% endfor %}
-            {% if pagination.has_next %}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ pagination.page + 1 }}" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ total_pages }}" aria-label="Last">
-                        <span aria-hidden="true">&raquo;&raquo;</span>
-                    </a>
-                </li>
-            {% endif %}
-        </ul>
-    </nav>
+    {% endif %}
+  </div>
+
+  <nav class="mt-8 flex justify-center">
+    <ul class="pagination inline-flex items-center gap-2">
+      {% if pagination.has_prev %}
+      <li class="page-item">
+        <a class="page-link" href="?page=1" aria-label="First"
+          >&laquo;&laquo;</a
+        >
+      </li>
+      <li class="page-item">
+        <a
+          class="page-link"
+          href="?page={{ pagination.page - 1 }}"
+          aria-label="Previous"
+          >&laquo;</a
+        >
+      </li>
+      {% endif %} {% for page_num in range(1, total_pages + 1) %} {% if page_num
+      == 1 or page_num == total_pages or (pagination.page - 1 <= page_num <=
+      pagination.page + 1) %}
+      <li
+        class="page-item {% if page_num == pagination.page %}active{% endif %}"
+      >
+        <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+      </li>
+      {% elif (page_num == 2 and pagination.page > 4) or (page_num ==
+      total_pages - 1 and pagination.page < total_pages - 3) %}
+      <li class="page-item"><span class="page-link">...</span></li>
+      {% endif %} {% endfor %} {% if pagination.has_next %}
+      <li class="page-item">
+        <a
+          class="page-link"
+          href="?page={{ pagination.page + 1 }}"
+          aria-label="Next"
+          >&raquo;</a
+        >
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="?page={{ total_pages }}" aria-label="Last"
+          >&raquo;&raquo;</a
+        >
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
 </div>
 {% endblock body %}
