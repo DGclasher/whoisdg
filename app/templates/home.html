@@ -1,54 +1,188 @@
-{% extends 'base.html' %}
-{% block title %}
-  Home
-{% endblock title %}
-{% block head %}
-  <link rel="stylesheet" href="/static/src/glitch.css">
-{% endblock head %}
-{% block body %}
-<div class="mt-2 py-1 px-4">
-  <div class="flex flex-col items-center mt-20 py-10">
-    <h1 class="text-sm md:text-4xl glitch sm:text-xl">DEBA GHOSH</h1>
-    <div class="max-w-[800px] mx-auto my-0;">
-      <div class="flex md:text-xl text-lg mt-2 p-2 md:py-5 text-white text-center mb-5">
-        <p>Computer Science undergrad passionate about Cybersecurity and DevOps. Committed to mastering both realms for enhanced digital security and agile software development.</p>
+{% extends 'base.html' %} {% block title %} Home {% endblock title %} {% block
+head %}
+<link rel="stylesheet" href="/static/src/glitch.css" />
+{% endblock head %} {% block body %}
+<div class="mx-auto w-full max-w-6xl px-4 py-10 md:px-8 md:py-16">
+  <section
+    class="relative overflow-hidden rounded-[36px] border border-white/10 bg-gradient-to-br from-slate-950/90 via-slate-900 to-zinc-950/90 p-8 shadow-[0_50px_120px_-60px_rgba(15,23,42,0.9)]"
+  >
+    <div
+      class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(132,204,22,0.16),_transparent_20%)] pointer-events-none"
+    ></div>
+
+    <div class="relative grid gap-10 lg:grid-cols-[1.4fr_1fr] items-center">
+      <div class="space-y-6">
+        <p class="text-sm uppercase tracking-[0.28em] text-lime-400">
+          DevOps · Software Engineering · AI Integration
+        </p>
+
+        <h1
+          class="text-4xl sm:text-4xl lg:text-5xl font-semibold leading-tight text-white"
+        >
+          Deba Ghosh
+        </h1>
+
+        <p class="max-w-2xl text-slate-400 text-base sm:text-lg">
+          Building secure software, scalable infrastructure, and intelligent
+          automation.
+        </p>
+
+        <div class="flex flex-col gap-4 lg:flex-row lg:items-center">
+          <div class="flex flex-col gap-4 sm:flex-row">
+            <a
+              href="{{url_for('projects')}}"
+              class="inline-flex items-center justify-center rounded-2xl bg-lime-600 px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-slate-950 transition hover:bg-lime-500"
+            >
+              View Projects
+            </a>
+
+            <form action="{{url_for('download')}}" class="inline-flex">
+              <button
+                type="submit"
+                class="inline-flex items-center justify-center rounded-2xl border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-white transition hover:border-lime-500 hover:text-lime-300"
+              >
+                Download Resume
+              </button>
+            </form>
+          </div>
+
+          <div class="flex items-center gap-5 lg:ml-2">
+            <a
+              href="https://github.com/DGclasher"
+              target="_blank"
+              class="text-2xl text-slate-300 transition hover:text-white"
+            >
+              <i class="fa-brands fa-github"></i>
+            </a>
+
+            <a
+              href="https://www.linkedin.com/in/debaghosh001"
+              target="_blank"
+              class="text-2xl text-slate-300 transition hover:text-white"
+            >
+              <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="rounded-[28px] border border-white/10 bg-black/40 p-6 backdrop-blur-xl shadow-2xl shadow-black/20"
+      >
+        <div class="space-y-6">
+          <div class="space-y-3">
+            <p class="text-sm uppercase tracking-[0.24em] text-slate-500">
+              About Me
+            </p>
+
+            <p class="text-slate-300">
+              I build secure, scalable, and cloud-ready applications using Java
+              and Spring Boot. My workflow emphasizes containerization with
+              Docker, automated CI/CD pipelines, and Linux-based deployments,
+              ensuring reliable software delivery while keeping security,
+              performance, and maintainability at the core of every project.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="p-2 mb-2 items-center">
-      <form action="{{url_for('download')}}">
-        <button type="submit" class="bg-lime-800 hover:bg-lime-900 text-white rounded-xl p-2">Download Resume</button>
-      </form>
+  </section>
+
+  <section class="mt-12 grid gap-4 sm:grid-cols-3">
+    <div class="glass-card p-6">
+      <p class="text-sm uppercase tracking-[0.18em] text-lime-400">
+        Software Engineering
+      </p>
+
+      <h2 class="mt-3 text-xl font-semibold">Java & Spring Boot</h2>
+
+      <p class="mt-2 text-slate-400">
+        Developing scalable backend applications, REST APIs, and microservices
+        with clean architecture, performance, and maintainability in mind.
+      </p>
     </div>
-    <div class="items-center p-2 mb-4">
-    {% with flashed_messages = get_flashed_messages() %}
-    {% if flashed_messages %}
-      <p class="" id="popupMessage">{{ flashed_messages | join}}</p>
-      {% endif %}
-      {% endwith %}
+
+    <div class="glass-card p-6">
+      <p class="text-sm uppercase tracking-[0.18em] text-lime-400">DevOps</p>
+
+      <h2 class="mt-3 text-xl font-semibold">Cloud & Automation</h2>
+
+      <p class="mt-2 text-slate-400">
+        Containerizing applications with Docker, building CI/CD pipelines, and
+        automating deployments on Linux for reliable and efficient delivery.
+      </p>
     </div>
-    <div class="flex flex-row">
-      <a href="https://github.com/DGclasher" target="_blank" class="text-3xl mr-4">
-        <i class="fa-brands fa-github "></i>
-      </a>
-      <a href="https://gitlab.com/DGclasher" target="_blank" class="text-3xl mr-4">
-        <i class="fa-brands fa-gitlab "></i>
-      </a>
-      <a href="https://www.linkedin.com/in/debaghosh001" target="_blank" class="text-3xl mr-4">
-        <i class="fa-brands fa-linkedin-in"></i>
-      </a>
-      <a href="https://leetcode.com/DGclasher" target="_blank" class="text-3xl mr-4">
-        <img src="/static/images/leetcode.png" class="w-9 invert">
-      </a>
-      <a href="https://app.hackthebox.com/users/432967" target="_blank" class="text-3xl mr-4">
-        <img src="/static/images/htb.svg" class="w-9 invert">
-      </a>
-      <a href="https://auth.geeksforgeeks.org/user/dgclasher" target="_blank" class="text-3xl mr-4">
-        <img src="/static/images/gfg.svg" class="w-9 invert">
-      </a>
-      <a href="https://www.hackerrank.com/DGclasher" target="_blank" class="text-3xl">
-        <i class="fa-brands fa-hackerrank"></i>
-      </a>
+
+    <div class="glass-card p-6">
+      <p class="text-sm uppercase tracking-[0.18em] text-lime-400">
+        AI & Security
+      </p>
+
+      <h2 class="mt-3 text-xl font-semibold">Intelligent & Secure Systems</h2>
+
+      <p class="mt-2 text-slate-400">
+        Integrating AI-powered features while following secure development
+        practices to build resilient, production-ready applications.
+      </p>
     </div>
+  </section>
+
+  <div
+    class="mt-12 flex flex-wrap justify-center gap-3 text-center text-sm text-slate-500"
+  >
+    <span class="rounded-full border border-white/10 bg-white/5 px-4 py-2">
+      Java
+    </span>
+
+    <span class="rounded-full border border-white/10 bg-white/5 px-4 py-2">
+      DevOps
+    </span>
+
+    <span class="rounded-full border border-white/10 bg-white/5 px-4 py-2">
+      Cybersecurity
+    </span>
+
+    <span class="rounded-full border border-white/10 bg-white/5 px-4 py-2">
+      Linux
+    </span>
+
+    <span class="rounded-full border border-white/10 bg-white/5 px-4 py-2">
+      Cloud
+    </span>
+  </div>
+
+  <div class="mt-10 flex justify-center gap-5 text-slate-300">
+    <a
+      href="https://app.hackthebox.com/users/432967"
+      target="_blank"
+      class="transition hover:opacity-80"
+    >
+      <img src="/static/images/htb.svg" alt="Hack The Box" class="w-8 invert" />
+    </a>
+
+    <a
+      href="https://auth.geeksforgeeks.org/user/dgclasher"
+      target="_blank"
+      class="transition hover:opacity-80"
+    >
+      <img
+        src="/static/images/gfg.svg"
+        alt="GeeksforGeeks"
+        class="w-8 invert"
+      />
+    </a>
+
+    <a
+      href="https://leetcode.com/DGclasher"
+      target="_blank"
+      class="transition hover:opacity-80"
+    >
+      <img
+        src="/static/images/leetcode.png"
+        alt="LeetCode"
+        class="w-8 invert"
+      />
+    </a>
   </div>
 </div>
 {% endblock body %}

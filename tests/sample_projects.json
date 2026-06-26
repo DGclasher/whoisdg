@@ -1,0 +1,23 @@
+[
+  {
+    "title": "Secure DevOps Toolkit",
+    "description": "An automation suite for vulnerability scanning and deployment orchestration with focus on secure pipelines.",
+    "tags": ["DevOps", "Security", "Automation"],
+    "repo": "https://github.com/DGclasher/secure-devops-toolkit",
+    "demo": "https://github.com/DGclasher/secure-devops-toolkit"
+  },
+  {
+    "title": "Capture The Flag Helper",
+    "description": "A lightweight tool designed to manage CTF challenges, track progress, and store notes securely.",
+    "tags": ["CTF", "Cybersecurity", "Python"],
+    "repo": "https://github.com/DGclasher/ctf-helper",
+    "demo": "https://github.com/DGclasher/ctf-helper"
+  },
+  {
+    "title": "Portfolio Dashboard",
+    "description": "A modern portfolio dashboard with custom analytics and smooth responsive design.",
+    "tags": ["Frontend", "Design", "Dashboard"],
+    "repo": "https://github.com/DGclasher/portfolio-dashboard",
+    "demo": "https://github.com/DGclasher/portfolio-dashboard"
+  }
+]

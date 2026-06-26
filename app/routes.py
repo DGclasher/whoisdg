@@ -19,6 +19,10 @@ from flask import ( render_template,
 def home():
     return render_template("home.html")
 
+@app.route("/projects")
+def projects():
+    return render_template("projects.html")
+
 @app.route("/download", methods=['GET'])
 def download():
     try:
@@ -46,7 +50,7 @@ def get_summary(full_summary):
     if len(words) < 20:
         return summary + " ..."
     summary = ""
-    summary = " ".join(words[i] for i in range(0, 20))
+    summary = " ".join(words[i] for i in range(0, 50))
     summary += " ..."
     return summary
 
