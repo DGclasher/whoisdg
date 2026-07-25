@@ -32,29 +32,29 @@ document.addEventListener("DOMContentLoaded", function () {
     const src = projectsGrid.dataset.src || "/static/data/projects.json";
     if (src && projectsLoading) {
       fetch(src)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((projects) => {
-        if (!Array.isArray(projects) || projects.length === 0) {
-          projectsLoading.textContent = "No projects found.";
-          return;
-        }
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((projects) => {
+          if (!Array.isArray(projects) || projects.length === 0) {
+            projectsLoading.textContent = "No projects found.";
+            return;
+          }
 
-        projectsLoading.style.display = "none";
-        projectsGrid.innerHTML = projects
-          .map((project) => {
-            const tags = project.tags
-              .map(
-                (tag) =>
-                  `<span class="inline-flex rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-300">${tag}</span>`,
-              )
-              .join("");
+          projectsLoading.style.display = "none";
+          projectsGrid.innerHTML = projects
+            .map((project) => {
+              const tags = project.tags
+                .map(
+                  (tag) =>
+                    `<span class="inline-flex rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-300">${tag}</span>`,
+                )
+                .join("");
 
-            return `
+              return `
               <article class="glass-card flex flex-col justify-between rounded-[28px] p-6 shadow-2xl shadow-black/20">
                 <div>
                   <p class="text-sm uppercase tracking-[0.22em] text-lime-400">Project</p>
@@ -68,13 +68,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 </div>
               </article>
             `;
-          })
-          .join("");
-      })
-      .catch((error) => {
-        console.error("Failed to load projects:", error);
-        projectsLoading.textContent = "Unable to load projects.";
-      });
+            })
+            .join("");
+        })
+        .catch((error) => {
+          console.error("Failed to load projects:", error);
+          projectsLoading.textContent = "Unable to load projects.";
+        });
+    }
   }
 
   // ---------------------------
