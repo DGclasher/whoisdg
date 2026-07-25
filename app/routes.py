@@ -1,6 +1,6 @@
 import re
 import json
-import random
+import os
 import requests
 import threading
 import feedparser
@@ -17,11 +17,51 @@ from flask import ( render_template,
 
 @app.route("/")
 def home():
-    return render_template("home.html")
+    experiences = []
+    exp_src = config('EXPERIENCE_SRC', default='tests/experience.json')
+    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+
+    try:
+        if isinstance(exp_src, str) and (exp_src.startswith('http://') or exp_src.startswith('https://')):
+            try:
+                resp = requests.get(exp_src, timeout=8)
+                resp.raise_for_status()
+                experiences = resp.json()
+            except Exception as e:
+                app.logger.error(f"Failed to fetch experiences from URL {exp_src}: {e}")
+                experiences = []
+        else:
+            path = exp_src if os.path.isabs(exp_src) else os.path.join(base_dir, exp_src)
+            with open(path, 'r') as f:
+                experiences = json.load(f)
+    except Exception as e:
+        app.logger.error(f"Failed to load experiences: {e}")
+
+    return render_template("home.html", experiences=experiences)
 
 @app.route("/projects")
 def projects():
-    return render_template("projects.html")
+    projects = []
+    proj_src = config('PROJECTS_SRC', default='tests/sample_projects.json')
+    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+
+    try:
+        if isinstance(proj_src, str) and (proj_src.startswith('http://') or proj_src.startswith('https://')):
+            try:
+                resp = requests.get(proj_src, timeout=8)
+                resp.raise_for_status()
+                projects = resp.json()
+            except Exception as e:
+                app.logger.error(f"Failed to fetch projects from URL {proj_src}: {e}")
+                projects = []
+        else:
+            path = proj_src if os.path.isabs(proj_src) else os.path.join(base_dir, proj_src)
+            with open(path, 'r') as f:
+                projects = json.load(f)
+    except Exception as e:
+        app.logger.error(f"Failed to load projects: {e}")
+
+    return render_template("projects.html", projects=projects)
 
 @app.route("/download", methods=['GET'])
 def download():

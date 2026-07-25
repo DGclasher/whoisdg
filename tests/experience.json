@@ -1,0 +1,15 @@
+[
+  {
+    "company": "Accenture",
+    "role": "Packaged Application Development Associate",
+    "location": "Kolkata, West Bengal",
+    "start_date": "October 2026",
+    "end_date": "Present",
+    "highlights": [
+      "Developed backend microservices using Java 21 and Spring Boot 3 for a multi-tenant Document Intelligence SaaS supporting AI-powered RAG Q&A.",
+      "Built REST API endpoints and integrated AWS S3 workflows for asynchronous document ingestion.",
+      "Fixed backend bugs to improve reliability and operational stability.",
+      "Implemented OAuth2/JWT RBAC and automated audit logging to maintain multi-tenant security."
+    ]
+  }
+]

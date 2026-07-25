@@ -88,6 +88,7 @@ head %}
     </div>
   </section>
 
+  <!-- Skills Section -->
   <section class="mt-12 grid gap-4 sm:grid-cols-3">
     <div class="glass-card p-6">
       <p class="text-sm uppercase tracking-[0.18em] text-lime-400">
@@ -150,6 +151,53 @@ head %}
       Cloud
     </span>
   </div>
+
+  <!-- Experience Section -->
+  <section class="mt-12">
+    <div
+      class="glass-card rounded-[28px] border border-white/10 bg-black/40 p-6 shadow-2xl shadow-black/20 backdrop-blur-xl"
+    >
+      <!-- Server-rendered experience container. Populated by Flask with `experiences`. -->
+      <div id="experienceContainer">
+        {% if experiences and experiences|length > 0 %} {% for exp in
+        experiences %}
+        <div
+          class="flex flex-col md:flex-row md:items-start md:justify-between gap-6"
+        >
+          <div class="md:max-w-xl">
+            <p class="text-sm uppercase tracking-[0.18em] text-slate-400">
+              Experience
+            </p>
+            <h3 class="mt-2 text-2xl font-semibold text-white">
+              {{ exp.company }}
+            </h3>
+            <p class="text-sm text-slate-400">
+              {{ exp.role }}{% if exp.location %} — {{ exp.location }}{% endif
+              %}
+            </p>
+            <p class="mt-1 text-sm text-slate-500">
+              {% if exp.start_date %}{{ exp.start_date }} &ndash; {{
+              exp.end_date or 'Present' }}{% else %}{{ exp.end_date or 'Present'
+              }}{% endif %}
+            </p>
+          </div>
+
+          <div class="md:w-1/2">
+            <ul class="mt-3 list-disc list-inside space-y-2 text-slate-300">
+              {% for h in exp.highlights %}
+              <li class="mt-1 text-slate-300">{{ h }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+        {% if not loop.last %}
+        <hr class="my-6 border-white/5" />
+        {% endif %} {% endfor %} {% else %}
+        <p class="text-slate-400">No experience found.</p>
+        {% endif %}
+      </div>
+    </div>
+  </section>
 
   <div class="mt-10 flex justify-center gap-5 text-slate-300">
     <a
