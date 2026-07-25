@@ -66,9 +66,10 @@ body {
   transition: background-color 0.3s ease;
 }
 
-#sideMenu {
-  backdrop-filter: blur(4px);
-}
+/* #sideMenu {
+  background-color: rgba(0, 0, 0, 0.95) !important;
+  backdrop-filter: blur(8px);
+} */
 
 nav.pagination-container {
   display: flex;
