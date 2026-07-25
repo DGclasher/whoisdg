@@ -27,8 +27,11 @@ document.addEventListener("DOMContentLoaded", function () {
   const projectsGrid = document.getElementById("projectsGrid");
   const projectsLoading = document.getElementById("projectsLoading");
 
-  if (projectsGrid && projectsLoading) {
-    fetch("/static/data/projects.json")
+  if (projectsGrid) {
+    // Only fetch client-side if a data-src is configured and the loading element exists.
+    const src = projectsGrid.dataset.src || "/static/data/projects.json";
+    if (src && projectsLoading) {
+      fetch(src)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -72,5 +75,77 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error("Failed to load projects:", error);
         projectsLoading.textContent = "Unable to load projects.";
       });
+  }
+
+  // ---------------------------
+  // Experience loader
+  // ---------------------------
+  // Renders an array of experience objects into #experienceContainer.
+  function renderExperiences(container, experiences) {
+    if (!Array.isArray(experiences) || experiences.length === 0) {
+      container.innerHTML =
+        '<p class="text-slate-400">No experience found.</p>';
+      return;
+    }
+
+    // Build HTML for each experience entry
+    const html = experiences
+      .map((exp) => {
+        const start = exp.start_date || "";
+        const end = exp.end_date || "Present";
+        const dates = start ? `${start} \u2013 ${end}` : end;
+
+        const bullets = (exp.highlights || [])
+          .map((b) => `<li class="mt-1 text-slate-300">${b}</li>`)
+          .join("");
+
+        return `
+          <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
+            <div class="md:max-w-xl">
+              <p class="text-sm uppercase tracking-[0.18em] text-slate-400">Experience</p>
+              <h3 class="mt-2 text-2xl font-semibold text-white">${exp.company}</h3>
+              <p class="text-sm text-slate-400">${exp.role} — ${exp.location || ""}</p>
+              <p class="mt-1 text-sm text-slate-500">${dates}</p>
+            </div>
+
+            <div class="md:w-1/2">
+              <ul class="mt-3 list-disc list-inside space-y-2 text-slate-300">
+                ${bullets}
+              </ul>
+            </div>
+          </div>
+        `;
+      })
+      .join('<hr class="my-6 border-white/5" />');
+
+    container.innerHTML = html;
+  }
+
+  // Load JSON from provided URL and render into the container.
+  function loadExperiences(url, container) {
+    const loadingEl = document.getElementById("experienceLoading");
+    if (loadingEl) loadingEl.textContent = "Loading experience…";
+
+    fetch(url)
+      .then((res) => {
+        if (!res.ok) throw new Error("Network response was not ok");
+        return res.json();
+      })
+      .then((data) => {
+        renderExperiences(container, data);
+      })
+      .catch((err) => {
+        console.error("Failed to load experience data:", err);
+        if (loadingEl) loadingEl.textContent = "Unable to load experience.";
+      });
+  }
+
+  const experienceContainer = document.getElementById("experienceContainer");
+  if (experienceContainer) {
+    // Only perform client-side fetch if an explicit data-src is provided.
+    const src = experienceContainer.dataset.src;
+    if (src) {
+      loadExperiences(src, experienceContainer);
+    }
   }
 });

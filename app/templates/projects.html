@@ -29,14 +29,52 @@ block body %}
       </h2>
     </div>
 
-    <div
-      id="projectsGrid"
-      class="grid gap-6 sm:grid-cols-2 xl:grid-cols-3"
-    ></div>
+    <div id="projectsGrid" class="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+      {% if projects and projects|length > 0 %} {% for project in projects %} {%
+      set tags = project.tags or [] %}
+      <article
+        class="glass-card flex flex-col justify-between rounded-[28px] p-6 shadow-2xl shadow-black/20"
+      >
+        <div>
+          <p class="text-sm uppercase tracking-[0.22em] text-lime-400">
+            Project
+          </p>
+          <h3 class="mt-4 text-2xl font-semibold text-white">
+            {{ project.title }}
+          </h3>
+          <p class="mt-4 text-slate-400">{{ project.description }}</p>
+        </div>
+        <div class="mt-6 flex flex-wrap gap-2">
+          {% for tag in tags %}
+          <span
+            class="inline-flex rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-300"
+            >{{ tag }}</span
+          >
+          {% endfor %}
+        </div>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a
+            href="{{ project.demo }}"
+            target="_blank"
+            class="rounded-full border border-lime-500/20 bg-lime-500/10 px-4 py-2 text-sm font-semibold text-lime-300 transition hover:bg-lime-500/20"
+            >Demo</a
+          >
+          <a
+            href="{{ project.repo }}"
+            target="_blank"
+            class="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:border-lime-500"
+            >Repo</a
+          >
+        </div>
+      </article>
+      {% endfor %} {% endif %}
+    </div>
 
+    {% if not projects or projects|length == 0 %}
     <div id="projectsLoading" class="mt-10 text-center text-slate-400">
       Loading projects...
     </div>
+    {% endif %}
   </section>
 </div>
 {% endblock body %}
